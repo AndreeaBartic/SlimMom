@@ -1,4 +1,4 @@
-import CalculatorForm from "../components/CalculatorForm";
+import CalculatorForm from "../components/CalculatorForm/CalculatorForm";
 import Header from "../components/Header";
 
 const Home = () => {

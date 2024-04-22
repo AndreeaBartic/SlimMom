@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSavedFormData } from "../Redux/calculator/calcSlice";
-import { loadSavedaddFood } from "../Redux/diary/addFoodSlice";
+import { loadSavedFormData } from "../../Redux/calculator/calcSlice";
+import { loadSavedaddFood } from "../../Redux/diary/addFoodSlice";
+import styles from "../Aside/Aside.module.css";
 
 const Aside = () => {
   const { data: formData } = useSelector((state) => state.formData);
@@ -26,10 +26,12 @@ const Aside = () => {
     }
   }, [formData, addFood]);
 
-  const consumedCalories = addFood.calories;
-  const leftCalories = formData.BMR ? formData.BMR - consumedCalories : "N/A";
-  const dailyRate = formData.BMR || "N/A";
-  const percentageOfNormal = formData?.BMR
+  const consumedCalories = Math.round(addFood.calories);
+  const leftCalories = formData.BMR
+    ? Math.round(formData.BMR - consumedCalories)
+    : "N/A";
+  const dailyRate = Math.round(formData.BMR) || "N/A";
+  const percentageOfNormal = formData.BMR
     ? ((consumedCalories / formData.BMR) * 100).toFixed(0)
     : "N/A";
 
@@ -39,21 +41,29 @@ const Aside = () => {
   }.${currentDate.getFullYear()}`;
 
   return (
-    <div className="container-aside">
-      <Logout />
-      <div className="content">
+    <div className={styles.containerAside}>
+      <div className={styles.content}>
         <div>
-          <h3>Summary for {formattedDate}</h3>
-          <ul>
-            <li>Left {leftCalories} kcal</li>
-            <li>Consumed {consumedCalories} kcal</li>
-            <li>Daily rate {dailyRate} kcal</li>
-            <li>{percentageOfNormal}% of normal kcal</li>
+          <h3 className={styles.title}>Summary for {formattedDate}</h3>
+          <ul className={styles.contentList}>
+            <li>
+              Left <span>{leftCalories} kcal</span>{" "}
+            </li>
+            <li>
+              Consumed <span>{consumedCalories} kcal</span>
+            </li>
+            <li>
+              Daily rate <span>{dailyRate} kcal</span>
+            </li>
+            <li>
+              n% of normal
+              <span>{percentageOfNormal}%</span>
+            </li>
           </ul>
         </div>
         <div>
-          <h3>Food not recommended</h3>
-          <ul>
+          <h3 className={styles.title}>Food not recommended</h3>
+          <ul className={styles.contentList}>
             {formData?.forbiddenCategories?.map((category, index) => (
               <li key={index}>{category}</li>
             ))}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import Loader from "./components/Loader";
+import PrivateRoute from "./components/PrivateRoute";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Login = React.lazy(() => import("./pages/Login"));
@@ -40,7 +41,9 @@ function App() {
           path="/calculator"
           element={
             <Suspense fallback={<Loader />}>
-              <Calculator />
+              <PrivateRoute>
+                <Calculator />
+              </PrivateRoute>
             </Suspense>
           }
         />
@@ -48,7 +51,9 @@ function App() {
           path="/diary"
           element={
             <Suspense fallback={<Loader />}>
-              <Diary />
+              <PrivateRoute>
+                <Diary />
+              </PrivateRoute>
             </Suspense>
           }
         />

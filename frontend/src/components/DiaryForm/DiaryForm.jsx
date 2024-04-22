@@ -104,7 +104,12 @@ const DiaryForm = () => {
               <div style={{ width: "237px" }}>{entry.category}</div>
               <div>{entry.grams}g</div>
               <div>{entry.calories.toFixed(2)} kcal</div>
-              <button onClick={() => handleDelete(index)}>X</button>
+              <button
+                className={styles.button}
+                onClick={() => handleDelete(index)}
+              >
+                X
+              </button>
             </li>
           ))}
         </ul>

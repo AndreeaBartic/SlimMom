@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../Redux/auth/authOperations";
+import { logoutUser } from "../../Redux/auth/authOperations";
 import { useNavigate } from "react-router-dom";
-import { selectUser } from "../Redux/auth/authSelectors";
+import { selectUser } from "../../Redux/auth/authSelectors";
+import styles from "./Logout.module.css";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -12,11 +13,11 @@ const Logout = () => {
   const username = typeof email === "string" ? email.split("@")[0] : "Guest";
 
   return (
-    <div>
-      <p>{username}</p>
+    <div className={styles.container}>
+      <p className={styles.title}>{username}</p>
       <button
+        className={styles.button}
         onClick={() => {
-          console.log("clicked");
           dispatch(logoutUser());
           navigate("/login");
         }}

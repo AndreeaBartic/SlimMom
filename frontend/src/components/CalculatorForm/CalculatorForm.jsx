@@ -1,12 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import CustomModal from "./Modal";
+import CustomModal from "../Modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { submitForm } from "../Redux/calculator/calcOperations";
-import productsData from "../db/products.json";
-import { selectIsLoggedIn } from "../Redux/auth/authSelectors";
+import { submitForm } from "../../Redux/calculator/calcOperations";
+import productsData from "../../db/products.json";
+import { selectIsLoggedIn } from "../../Redux/auth/authSelectors";
+import styles from "./CalculatorForm.module.css";
 
 const validationSchema = Yup.object({
   height: Yup.number()
@@ -67,7 +68,7 @@ const CalculatorForm = () => {
   };
 
   return (
-    <div className="calculator-container">
+    <div className={styles.calculatorContainer}>
       <h1>Calculate your daily calorie intake right now</h1>
       <Formik
         validationSchema={validationSchema}
@@ -80,9 +81,8 @@ const CalculatorForm = () => {
         }}
         onSubmit={handleSubmit}
       >
-        <Form className="form-calculator">
-          <div className="left-container">
-            {" "}
+        <Form className={styles.formCalculator}>
+          <div className={styles.leftContainer}>
             <label>Height *</label>
             <Field type="number" name="height" />
             <ErrorMessage name="height" component="div" />
@@ -93,25 +93,25 @@ const CalculatorForm = () => {
             <Field type="number" name="currentWeight" />
             <ErrorMessage name="currentWeight" component="div" />
           </div>
-          <div className="right-container">
+          <div className={styles.rightContainer}>
             <label>Desired weight *</label>
             <Field type="number" name="desiredWeight" />
             <ErrorMessage name="desiredWeight" component="div" />
             <label htmlFor="bloodA">Blood type *</label>
-            <div className="blood-type-options">
-              <div className="radio-option">
+            <div className={styles.bloodTypeOptions}>
+              <div className={styles.radioOption}>
                 <Field id="bloodA" type="radio" name="bloodType" value="A" />
                 <label htmlFor="bloodA">A</label>
               </div>
-              <div className="radio-option">
+              <div className={styles.radioOption}>
                 <Field id="bloodB" type="radio" name="bloodType" value="B" />
                 <label htmlFor="bloodB">B</label>
               </div>
-              <div className="radio-option">
+              <div className={styles.radioOption}>
                 <Field id="bloodAB" type="radio" name="bloodType" value="AB" />
                 <label htmlFor="bloodAB">AB</label>
               </div>
-              <div className="radio-option">
+              <div className={styles.radioOption}>
                 <Field id="bloodO" type="radio" name="bloodType" value="O" />
                 <label htmlFor="bloodO"> 0</label>
               </div>
@@ -123,9 +123,9 @@ const CalculatorForm = () => {
             />
           </div>
 
-          <div className="button-container">
+          <div>
             {" "}
-            <button className="calculator-button" type="submit">
+            <button className={styles.calculatorButton} type="submit">
               Start losing weight
             </button>
           </div>

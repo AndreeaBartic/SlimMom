@@ -1,4 +1,4 @@
-import Aside from "../components/Aside";
+import Aside from "../components/Aside/Aside";
 import DiaryForm from "../components/DiaryForm/DiaryForm";
 import Header from "../components/Header";
 
